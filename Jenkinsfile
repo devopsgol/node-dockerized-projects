@@ -22,16 +22,16 @@ pipeline {
 
         stage("Build Image"){
             steps{
-                sh 'docker build -t my-node-app:1.0 .'
+                sh 'sudo docker build -t my-node-app:1.0 .'
             }
         }
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'docker tag my-node-app:1.0 adinugroho251/my-node-app:1.0'
-                    sh 'docker push adinugroho251/my-node-app:1.0'
-                    sh 'docker logout'
+                    sh 'sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    sh 'sudo docker tag my-node-app:1.0 adinugroho251/my-node-app:1.0'
+                    sh 'sudo docker push adinugroho251/my-node-app:1.0'
+                    sh 'sudo docker logout'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
       stage('Docker RUN') {
           agent any
           steps {
-      	     sh 'docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.0 .'
+      	     sh 'sudo docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.0 .'
       }
     }
  }
