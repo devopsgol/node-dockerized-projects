@@ -27,11 +27,10 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    sh 'sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'sudo docker tag my-node-app:1.0 bagol6969/my-node-app:1.0'
-                    sh 'sudo docker push bagol6969/my-node-app:1.0'
-                    sh 'sudo docker logout'
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "sudo docker login -u $dockerHubUser -p $dockerHubPassword"
+                    sh "sudo docker push ${imagename}:latest"
+                    sh "sudo docker rmi ${imagename}:latest"
                 }
             }
         }
