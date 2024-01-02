@@ -39,7 +39,7 @@ pipeline {
       stage('Docker RUN') {
           agent any
           steps {
-      	     sh 'sudo docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.0 .'
+      	     sh 'docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.0 .'
       }
     }
  }
