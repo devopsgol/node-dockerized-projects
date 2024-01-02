@@ -8,31 +8,39 @@ pipeline {
         }
 
         stage("Test"){
-            steps{
-                sh 'sudo apt install npm'
-                sh 'npm test'
+            steps {
+                script {
+                    sh "sudo apt install npm -y"
+                    sh "npm test"
             }
         }
+    }
 
         stage("Build"){
             steps{
-                sh 'npm run build'
+                script {
+                    sh "npm run build"
             }
         }
+    }
 
         stage("Build Image"){
             steps{
-                sh 'sudo docker build -t my-node-app:1.0 .'
+                script {
+                docker.build("${imagename}:latest", ".")
             }
         }
+    }
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "sudo docker login --password-stdin -u $dockerHubUser -p $dockerHubPassword"
-                    sh "sudo docker push ${imagename}:latest"
-                    sh "sudo docker rmi ${imagename}:latest"
+                    script {
+                        sh "sudo docker login --password-stdin -u $dockerHubUser -p $dockerHubPassword"
+                        sh "sudo docker push ${imagename}:latest"
+                        sh "sudo docker rmi ${imagename}:latest"
                 }
             }
         }
     }
+}
 }
