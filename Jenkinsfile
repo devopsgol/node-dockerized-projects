@@ -22,7 +22,7 @@ pipeline {
 
         stage("Build Image"){
             steps{
-                sh 'docker build -t my-node-app-devopsgol:1.0 .'
+                sh 'sudo docker build -t my-node-app-devopsgol:1.0 .'
             }
         }
     }
