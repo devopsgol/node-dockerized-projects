@@ -38,7 +38,7 @@ pipeline {
 
       stage('Docker RUN') {
           steps {
-      	     sh 'docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.2 .'
+      	     sh 'docker run -d -p 6969:3000 --name webserver-devopsgol  adinugroho251/my-node-app:1.2'
       }
     }
  }
