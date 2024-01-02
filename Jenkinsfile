@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                     sh "sudo docker login -u $dockerHubUser -p $dockerHubPassword"
                     sh "sudo docker push ${imagename}:latest"
                     sh "sudo docker rmi ${imagename}:latest"
