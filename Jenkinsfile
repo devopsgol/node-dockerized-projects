@@ -35,5 +35,13 @@ pipeline {
                 }
             }
         }
+
+      stage('Docker Build') {
+          agent any
+          steps {
+      	     sh 'sudo docker build -t adinugroho251/my-node-app:1.0 .'
+      }
     }
-}
+ }
+}    
+    
