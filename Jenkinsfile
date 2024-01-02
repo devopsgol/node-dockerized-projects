@@ -25,6 +25,7 @@ pipeline {
                 sh 'sudo docker build -t my-node-app-devopsgol:1.0 .'
             }
         }
+        
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
