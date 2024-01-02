@@ -9,7 +9,7 @@ pipeline {
 
         stage("Test"){
             steps{
-                sh 'sudo apt install npm -y'
+                sh 'sudo apt install npm'
                 sh 'npm test'
             }
         }
@@ -23,6 +23,16 @@ pipeline {
         stage("Build Image"){
             steps{
                 sh 'sudo docker build -t my-node-app-devopsgol:1.0 .'
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                    sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    sh 'docker tag my-node-app-devopsgol:1.0 bagol6969/my-node-app-devopsgol:1.0'
+                    sh 'docker push bagol6969/my-node-app-devopsgol:1.0
+                    sh 'docker logout'
+                }
             }
         }
     }
