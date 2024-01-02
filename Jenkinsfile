@@ -8,39 +8,32 @@ pipeline {
         }
 
         stage("Test"){
-            steps {
-                script {
-                    sh "sudo apt install npm -y"
-                    sh "npm test"
+            steps{
+                sh 'sudo apt install npm -y'
+                sh 'npm test'
             }
         }
-    }
 
         stage("Build"){
             steps{
-                script {
-                    sh "npm run build"
+                sh 'npm run build'
             }
         }
-    }
 
         stage("Build Image"){
             steps{
-                script {
-                docker.build("${imagename}:latest", ".")
+                sh 'sudo docker build -t my-node-app:1.0 .'
             }
         }
-    }
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    script {
-                        sh "sudo docker login --password-stdin -u $dockerHubUser -p $dockerHubPassword"
-                        sh "sudo docker push ${imagename}:latest"
-                        sh "sudo docker rmi ${imagename}:latest"
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                    sh 'sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
+                    sh 'sudo docker tag my-node-app:1.0 adinugroho251/my-node-app:1.0'
+                    sh 'sudo docker push adinugroho251/my-node-app:1.0'
+                    sh 'sudo docker logout'
                 }
             }
         }
     }
-}
 }
