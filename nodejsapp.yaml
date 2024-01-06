@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: nodejs-app-devopsgol
-        image: "adinugroho251/my-node-app:latest"
+        image: "adinugroho251/my-node-app:1.3"
         ports:
           - containerPort: 3000
 ---
