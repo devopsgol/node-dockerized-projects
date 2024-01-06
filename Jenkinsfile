@@ -22,25 +22,31 @@ pipeline {
 
         stage("Build Image"){
             steps{
-                sh 'sudo docker build -t my-node-app:1.2 .'
+                sh 'sudo docker build -t my-node-app:1.3 .'
             }
         }
         stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                     sh 'sudo docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
-                    sh 'sudo docker tag my-node-app:1.2 adinugroho251/my-node-app:1.2'
-                    sh 'sudo docker push adinugroho251/my-node-app:1.2'
+                    sh 'sudo docker tag my-node-app:1.3 adinugroho251/my-node-app:1.3'
+                    sh 'sudo docker push adinugroho251/my-node-app:1.3'
                     sh 'sudo docker logout'
                 }
             }
         }
 
-      stage('Docker RUN') {
+      stage('Deploying Node App to K8S') {
           steps {
-      	     sh 'sudo docker run -d -p 3000 --name webserver-devopsgol69  adinugroho251/my-node-app:1.2'
+               withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'kubernetes', contextName: '', credentialsId: 'kubernetes-devopsgol', namespace: 'default', serverUrl: 'https://10.20.30.40']]) {
+                   sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
+                   sh 'chmod u+x ./kubectl'
+                   sh "kubectl get ns"
+                   sh "kubectl apply -f nodejsapp.yaml"
+                   
       }
     }
  }
 }    
+}
     
