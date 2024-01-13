@@ -40,7 +40,7 @@ pipeline {
 
       stage('Docker RUN') {
           steps {
-      	     sh 'sudo docker run -d -p 80 --name deploy-apps-nodejs-devopsgol  adinugroho251/my-node-app:latest'
+      	     sh 'sudo docker run -d -p 3000 --name deploy-apps-nodejs-devopsgol  adinugroho251/my-node-app:latest'
       }
     }
 }    
