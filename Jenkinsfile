@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+           label 'slave-devopsgol'
+    }
     stages{
         stage("checkout"){
             steps{
