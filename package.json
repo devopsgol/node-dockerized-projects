@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "build": "echo 'Running Build Script by devopsgol'"
+    "build": "echo 'Running Building Scripting Scanning Snyk Security By devopsgol'"
   },
   "author": "",
   "license": "ISC",
