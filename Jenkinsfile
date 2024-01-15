@@ -24,7 +24,7 @@ pipeline {
 
         stage('Scan') {
             steps{
-                snykSecurity organisation: 'devopsgol', projectName: 'synk-apps-to-html-devopsgol', severity: 'medium', snykInstallation: 'synk-devopsgol', snykTokenId: 'ca7f504e-fa39-4565-8064-369f9f7f51a8', targetFile: 'package.json'
+                snykSecurity organisation: 'devopsgol', projectName: 'synk-apps-to-html-devopsgol', severity: 'medium', snykInstallation: 'synk-devopsgol', snykTokenId: 'snyk_token', targetFile: 'package.json'
         }
         }
         stage("Build Image"){
