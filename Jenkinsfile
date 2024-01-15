@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage('Scan') {
+        stage('Scan By snyk security vuln') {
             steps{
                 snykSecurity organisation: 'devopsgol', projectName: 'synk-apps-to-html-devopsgol', severity: 'medium', snykInstallation: 'synk-devopsgol', snykTokenId: 'snyk_token', targetFile: 'package.json'
         }
