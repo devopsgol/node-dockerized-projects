@@ -22,7 +22,7 @@ pipeline {
             }
         }
 
-        stage("scan by snyk") {
+        stage("scan by snyk"){
             snykSecurity organisation: 'devopsgol', projectName: 'synk-apps-to-html-devopsgol', snykInstallation: 'synk-devopsgol', snykTokenId: 'snyk_token', targetFile: 'package.json'
         }
 
