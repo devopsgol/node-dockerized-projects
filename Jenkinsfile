@@ -3,6 +3,11 @@ pipeline {
         label 'slave-devopsgol'
     }
     
+    tools {
+        jdk 'jdk11'
+        maven 'maven3'
+    }
+    
     stages{
         stage("checkout"){
             steps{
