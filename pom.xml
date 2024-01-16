@@ -10,12 +10,12 @@
 	<packaging>war</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 	<scm>
-		<url>https://github.com/robmazan/maven-nodejs-sample/</url>
-		<connection>scm:git:https://github.com/robmazan/maven-nodejs-sample.git</connection>
-		<developerConnection>scm:git:https://github.com/robmazan/maven-nodejs-sample.git</developerConnection>
+		<url>https://github.com/devopsgol/node-dockerized-projects/</url>
+		<connection>scm:git:https://github.com/devopsgol/node-dockerized-projects.git</connection>
+		<developerConnection>scm:git:https://github.com/devopsgol/node-dockerized-projects.git</developerConnection>
 	</scm>
 	<issueManagement>
-		<url>https://github.com/robmazan/maven-nodejs-sample/issues</url>
+		<url>https://github.com/devopsgol/node-dockerized-projects/issues</url>
 	</issueManagement>
 	<properties>
 		<java-version>1.6</java-version>
