@@ -6,6 +6,7 @@ pipeline {
                jdk 'jdk11'
                maven 'maven3'
            }
+        
         environment { 
             SCANNER_HOME=tool 'sonarqube-devops'
         }
