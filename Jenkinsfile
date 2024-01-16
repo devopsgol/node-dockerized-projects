@@ -31,10 +31,7 @@ pipeline {
         stage('SAST SCAN BY SONARQUBE') {
             steps{
                 withSonarQubeEnv('sonarqube-devops') {
-                    sh "mvn package"
-                    sh ''' $SCANNER_HOME/bin/sonarqube-devops -Dsonar.url=http://10.20.40.45:9000/ -Dsonarlogin=squ_84d260c50255d9dff18114aaaf0a7638cbc96fab -Dsonar.projectName=node-dockerized-projects \
-                    -Dsonar.java.binaries=. \
-                    -Dsonar.projectKey=node-dockerized-projects '''
+                    sh ''' sonar-scanner  -Dsonar.projectKey=sonarqube_scanner  -Dsonar.sources=.  -Dsonar.host.url=http://10.20.40.45:9000   -sonar.token=sqp_5386944df1207efd651d1c6c61c0f4cbcdf215c7'''
                 }
             }
         }
