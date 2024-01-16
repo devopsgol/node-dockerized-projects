@@ -1,15 +1,6 @@
 pipeline {
     agent {
         label 'slave-devopsgol'
-        
-        tools{
-               jdk 'jdk11'
-               maven 'maven3'
-           }
-        
-        environment { 
-            SCANNER_HOME=tool 'sonarqube-devops'
-        }
     }
     
     stages{
